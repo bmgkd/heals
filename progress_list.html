@@ -1,0 +1,16 @@
+<!-- progress_list.html -->
+{% extends "base.html" %}
+
+{% block body %}
+{%load static%}
+<h2>Progress List</h2>
+<ul>
+    {% for progress in progress_data %}
+    <li>{{ progress.date }}: {{ progress.value }}</li>
+    {% endfor %}
+</ul>
+
+<p>Weekly Total: {{ weekly_total }}</p>
+<p>Monthly Total: {{ monthly_total }}</p>
+<a href="{% url 'add_progress' %}">add progress</a>
+{% endblock body %}

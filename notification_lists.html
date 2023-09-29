@@ -1,0 +1,19 @@
+<!-- notification_list.html -->
+{% extends "base.html" %}
+
+{% block body %}
+{%load static%}
+<h2>Notifications</h2>
+<ul>
+    {% for notification in notifications %}
+    <li>
+        {% if not notification.is_read %}
+        <strong>{{ notification.message }}</strong>
+        <a href="{% url 'mark_notification_as_read' notification.id %}">Mark as Read</a>
+        {% else %}
+        {{ notification.message }}
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock body %}

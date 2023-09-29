@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block body %}
+{%load static%}
+<div class = "container my-3">
+ <h2>Welcome to Your Dashboard, {{ user.username }}</h2>
+  <div class="container mt-4 mb-4 p-3 d-flex justify-content-center"> 
+    <div class="card p-4"> <div class=" image d-flex flex-column justify-content-center align-items-center">
+         <button class="btn btn-secondary"> 
+            <img src="https://i.imgur.com/wvxPV9S.png" height="100" width="100" />
+            <a href="{% url 'profile' %}"></button>
+             
+              <span class="idd">@eleanorpena</span> 
+</div>
+
+<div class="dashboard-options">
+  <a href="{% url 'progress_list' %}">progress list</a>
+  <a href="{% url 'settings' %}">Settings</a>
+  <a href="{% url 'logout' %}">Logout</a>
+
+</div>
+
+
+{% endblock body %}

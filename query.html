@@ -1,0 +1,104 @@
+<!-- settings.html -->
+{% extends "base.html" %}
+
+{% block body %}
+{%load static%}
+
+<h1>Query Page</h1>
+</header>
+
+<main>
+    <!-- Section for posting a new query -->
+    <section id="postQuery">
+        <h2>Post a Query</h2>
+        <textarea id="queryText" placeholder="Type your query here"></textarea>
+        <button id="postButton">Post</button>
+    </section>
+
+    <!-- Section for viewing queries and comments -->
+    <section id="viewQueries">
+        <h2>Recent Queries</h2>
+        <ul id="queryList">
+            <!-- Queries and comments will be dynamically added here -->
+        </ul>
+    </section>
+</main>
+<script>
+
+// Sample data to simulate queries and comments (you'll replace this with actual data storage)
+const queries = [
+    {
+        id: 1,
+        text: "How can I improve my meditation practice?",
+        comments: [
+            { id: 101, text: "You can try focusing on your breath." },
+            { id: 102, text: "Meditation apps can be helpful too." },
+        ],
+    },
+    {
+        id: 2,
+        text: "What are some good books on mindfulness?",
+        comments: [
+            { id: 201, text: "I recommend 'The Power of Now' by Eckhart Tolle." },
+        ],
+    },
+];
+
+// Function to display queries and comments
+function displayQueries() {
+    const queryList = document.getElementById("queryList");
+    queryList.innerHTML = ""; // Clear existing content
+
+    queries.forEach((query) => {
+        const queryItem = document.createElement("li");
+        queryItem.innerHTML = `<p>${query.text}</p>`;
+
+        // Add a section for comments
+        const commentsList = document.createElement("ul");
+        query.comments.forEach((comment) => {
+            const commentItem = document.createElement("li");
+            commentItem.innerHTML = comment.text;
+            commentsList.appendChild(commentItem);
+        });
+
+        // Add a form to post comments
+        const commentForm = document.createElement("form");
+        commentForm.innerHTML = `
+            <input type="text" placeholder="Add a comment" id="commentText${query.id}">
+            <button type="submit">Post</button>
+        `;
+
+        // Event listener to handle comment submission
+        commentForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+            const commentText = document.getElementById(`commentText${query.id}`).value;
+            query.comments.push({ id: Date.now(), text: commentText });
+            displayQueries();
+        });
+
+        queryItem.appendChild(commentsList);
+        queryItem.appendChild(commentForm);
+        queryList.appendChild(queryItem);
+    });
+}
+
+// Function to handle query submission
+document.getElementById("postButton").addEventListener("click", () => {
+    const queryText = document.getElementById("queryText").value;
+    if (queryText) {
+        const newQuery = {
+            id: Date.now(),
+            text: queryText,
+            comments: [],
+        };
+        queries.push(newQuery);
+        displayQueries();
+        document.getElementById("queryText").value = ""; // Clear the text area
+    }
+});
+
+// Initial display of queries
+displayQueries();
+</script>
+
+{%endblock body%}

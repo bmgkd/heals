@@ -1,0 +1,12 @@
+<!-- add_progress.html -->
+{% extends "base.html" %}
+
+{% block body %}
+{%load static%}
+<h2>Add Progress</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+{% endblock body %}

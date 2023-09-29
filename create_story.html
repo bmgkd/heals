@@ -1,0 +1,24 @@
+{%extends 'base.html' %}
+
+{%block body%}
+
+
+{% load static %}
+
+
+<form method="post">
+    {% csrf_token %}
+    <label for="content">Story Content:</label>
+    <textarea name="content" rows="5" required></textarea>
+    <label for="story_type">Story Type:</label>
+    <select name="story_type" required>
+        <option value="reason">Depression Reason</option>
+        <option value="self_care">Self-Care</option>
+        <option value="recovery">Overcoming Depression</option>
+    </select>
+    <button type="submit">Add Story</button>
+</form>
+
+
+
+{% endblock body%}

@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block body %}
+{%load static%}
+
+
+
+
+<link rel="stylesheet" href="{% static 'cor.css' %}">
+<script src="{% static'script4.js' %}"></script>
+<header>
+    <h1>Account Settings</h1>
+
+</header>
+<main>
+    <section id="profile-section">
+        <h2>Profile Information</h2>
+        <!-- Profile information form -->
+        <form id="profile-form">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <button type="submit">Update Profile</button>
+        </form>
+    </section>
+
+    <section id="password-section">
+        <h2>Change Password</h2>
+        <!-- Change password form -->
+        <form id="password-form">
+            <label for="current-password">Current Password:</label>
+            <input type="password" id="current-password" name="current-password" required>
+            <label for="new-password">New Password:</label>
+            <input type="password" id="new-password" name="new-password" required>
+            <label for="confirm-password">Confirm New Password:</label>
+            <input type="password" id="confirm-password" name="confirm-password" required>
+            <button type="submit">Change Password</button>
+        </form>
+    </section>
+  
+    <h3>preference</h3>
+    <label class="switch">
+      <input type="checkbox">
+      <span class="slider round">Public</span>
+    </label>
+    
+    <label class="switch">
+      <input type="checkbox" checked>
+      <span class="slider round">private</span>
+    </label>
+    
+
+    <h4>access permission for camera and location</h4>
+    <label class="switch">
+      <input type="checkbox">
+      <span class="slider round"></span>
+    </label>
+    
+    <label class="switch">
+      <input type="checkbox" checked>
+      <span class="slider round"></span>
+    </label>
+
+    <h4>language perference</h4>
+
+    <div id="google_translate_element">choose the language</div>
+
+    <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+    </script>
+    
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    
+  
+    <a href ="{% url 'deactivate_account' %}" ><h5>Account Deactivation</h5> </a>
+
+
+
+{% if user.is_authenticated %}
+  <p>Welcome, {{ user.username }}!</p>
+  <a href="{% url 'logout' %}">Logout</a>
+{% else %}
+  <p>You are not logged in.</p>
+{% endif %}
+
+
+
+
+
+
+
+{%endblock body%}

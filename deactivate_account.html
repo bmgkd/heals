@@ -1,0 +1,12 @@
+<!-- deactivate_account.html -->
+
+{% extends "base.html" %}
+
+{% block body %}
+  <h2>Deactivate Your Account</h2>
+  <p>Are you sure you want to deactivate your account?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Deactivate Account</button>
+  </form>
+{% endblock body %}

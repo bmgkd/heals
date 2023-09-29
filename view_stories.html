@@ -1,0 +1,19 @@
+{%extends 'base.html' %}
+
+{%block body%}
+
+
+{% load static %}
+
+
+{% for story in stories %}
+    <div class="story">
+        <h3>{{ story.get_story_type_display }}</h3>
+        <p>{{ story.content }}</p>
+        <p>Posted by {{ story.user.username }} at {{ story.created_at }}</p>
+    </div>
+{% endfor %}
+
+
+ 
+{%endblock body%}
